@@ -4,13 +4,15 @@ class UsersController < ApplicationController
         erb :login
     end
 
+    #Creates a user
     post "/login" do 
-        @user = User.find_by(:username params[:username])
+        @user = User.find_by(username: params[:username])
         if @user.authenticate(params[:password])
             session[:user_id] = @user.id
             redirect "users/#{@user.id}"
         else
 
+        end
     end
 
     get "/signup" do 
@@ -18,11 +20,19 @@ class UsersController < ApplicationController
     end 
 
     post "/signup" do  
-
+        if params[:username] != "" && params[:passowrd] != "" && params[:email] != ""
+            @user = User.create(name: params[:username], email: params[:email], password: params[:password])
+            redirect "/users/#{@user.id}"
+            erb :"/users/show"
+        else
+            redirect "/signup"
+        end
     end
 
+    #user show route
     get "/users/:id" do
-
+        @user = User.find_by(id: params[:id])
+        erb :"/users/show"
     end
 
 
