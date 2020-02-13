@@ -1,11 +1,12 @@
 <form action="/games/<%= @game.id %>" method="POST">
-    <input id="hidden" type="hidden" name="_method" value="patch">
+    <input id="hidden" type="hidden" name="_method" value="patch"><br>
     <label for="name">Title:</label>
-    <input type="text" name="name">
+    <input type="text" value="<%=@game.name%>" name="name"><br>
     <label for="console">Console:</label>
-    <input type="text" name="console">
+    <input type="text" name="console" value="<%=@game.console%>"><br>
     <label for="release_date">Release Date:</label>
-    <input type="number" name="release_date">
+    <input type="number" name="release_date" value="<%=@game.release_date%>"><br>
     <label for="details">Details: </label>
-    <input type="text" name="details"> 
+    <textarea style="width:auto; height:auto;" name="details" id="" cols="30" rows="10"><%=@game.details%></textarea>
+    <input type="submit" value="Edit Game">
 </form>

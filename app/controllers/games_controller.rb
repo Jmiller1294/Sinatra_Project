@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
     
+    #Displays all games
     get "/games" do 
         @games = Game.all
         erb :"/games/index"
@@ -32,24 +33,49 @@ class GamesController < ApplicationController
 
     #Displays a form to edit a game
     get "/games/:id/edit" do 
-        erb :"/games/edit"
+        @game = Game.find_by(id: params[:id])
+        if logged_in?
+            if @game.user == current_user
+                erb :"/games/edit"
+            else
+                redirect "/"
+            end
+        else
+            redirect "/"
+        end
     end
 
     #Modifies an existing game
     patch "/games/:id" do 
         @game = Game.find_by(id: params[:id])
-        @game.name = params[:name]
-        @game.console = params[:console]
-        @game.release_date = params[:release_date]
-        @game.details = params[:details]
-        @game.save
-        redirect "/games/#{@game.id}"
+        if logged_in?
+            if @game.user == current_user
+                game.name = params[:name]
+                @game.console = params[:console]
+                @game.release_date = params[:release_date]
+                @game.details = params[:details]
+                @game.save
+                redirect "/games/#{@game.id}"
+            else
+                redirect "/"
+            end
+        else
+            redirect "/"
+        end
     end
 
+    #deletes an existing game 
     delete "/games/:id" do 
         @game = Game.find_by(id: params[:id])
-        @game.delete
-        redirect "/games"
+        if logged_in?
+            if @game.user == current_user
+                @game.delete
+                redirect "/games"
+            else
+                redirect "/"
+        else
+            redirect "/"
+        end
     end
     
     
