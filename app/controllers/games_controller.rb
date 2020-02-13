@@ -2,8 +2,7 @@ class GamesController < ApplicationController
     
     get "/games" do 
         @games = Game.all
-        erb :index
-
+        erb :"/games/index"
     end
 
     #Dislpays a form to create a new game
@@ -40,6 +39,9 @@ class GamesController < ApplicationController
     end
 
     delete "/games/:id" do 
+        @game = Game.find_by(id: params[:id])
+        @game.delete
+        redirect "/games"
     end
     
     
