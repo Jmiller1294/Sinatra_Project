@@ -1,0 +1,11 @@
+<form action="/games/<%= @game.id %>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label for="name">Title:</label>
+    <input type="text" name="name">
+    <label for="console">Console:</label>
+    <input type="text" name="console">
+    <label for="release_date">Release Date:</label>
+    <input type="number" name="release_date">
+    <label for="details">Details: </label>
+    <input type="text" name="details"> 
+</form>
