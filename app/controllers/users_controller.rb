@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
     #Creates a user
     post "/login" do 
-        @user = User.find_by(username: params[:username])
+        @user = User.find_by(name: params[:name])
         if @user.authenticate(params[:password])
             session[:user_id] = @user.id #logs the user in 
             redirect "users/#{@user.id}"

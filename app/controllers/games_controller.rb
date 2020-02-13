@@ -12,8 +12,16 @@ class GamesController < ApplicationController
 
     #Creates a new game
     post "/games" do 
-        @game = Game.create(name: params[:name], console: params[:console], release_date: params[:release_date], details: params[:details])
-        redirect "/games/#{@game.id}"
+        if logged_in?
+            if params[:name] != "" && params[:console] !="" && params[:release_date] != "" && params[:details] !=""
+                @game = Game.create(user_id: current_user.id, name: params[:name], console: params[:console], release_date: params[:release_date], details: params[:details])
+                redirect "/games/#{@game.id}"
+            else
+                redirect "/games/new"
+            end
+        else
+            redirect "/"
+        end
     end
 
     #Displays a game based on id
