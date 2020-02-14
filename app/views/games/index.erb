@@ -8,6 +8,10 @@
 <p><%="Details: #{game.details}"%><br></p>
 <p><a href="/games/<%= "#{game.id}" %>/edit">edit game</a>
 </p>
+<form action="/games/<%= "#{game.id}" %>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="delete game">
+</form>
 <%end%>
 </body>
 

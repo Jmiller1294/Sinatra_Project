@@ -4,4 +4,8 @@
 <p>Release Date: <%=@game.release_date%></p>
 <p>Details: <%=@game.details%></p>
 <a href="/games/<%=@game.id%>/edit">Edit Game Information</a>
+<form action="/games/<%= @game.id %>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="delete game">
+</form>
 

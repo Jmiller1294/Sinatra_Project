@@ -81,7 +81,7 @@ class GamesController < ApplicationController
         @game = Game.find_by(id: params[:id])
         if logged_in?
             if @game.user == current_user
-                @game.delete
+                @game.destroy
                 redirect "/games"
             else
                 redirect "/"
