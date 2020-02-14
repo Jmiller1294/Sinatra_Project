@@ -16,7 +16,11 @@ class GamesController < ApplicationController
         if logged_in?
             if params[:name] != "" && params[:console] !="" && params[:release_date] != "" && params[:details] !=""
                 @game = Game.create(user_id: current_user.id, name: params[:name], console: params[:console], release_date: params[:release_date], details: params[:details])
-                redirect "/games/#{@game.id}"
+                if @game.user == current_user
+                    redirect "/games/#{@game.id}"
+                else 
+                    redirect "/"
+                end
             else
                 redirect "/games/new"
             end
@@ -28,7 +32,15 @@ class GamesController < ApplicationController
     #Displays a game based on id
     get "/games/:id" do 
         @game = Game.find_by(id: params[:id])
-        erb :"/games/show"
+        if logged_in?
+            if @game.user == current_user
+                erb :"/games/show"
+            else
+                redirect "/"
+            end
+        else
+            redirect "/"
+        end
     end
 
     #Displays a form to edit a game
@@ -50,7 +62,7 @@ class GamesController < ApplicationController
         @game = Game.find_by(id: params[:id])
         if logged_in?
             if @game.user == current_user
-                game.name = params[:name]
+                @game.name = params[:name]
                 @game.console = params[:console]
                 @game.release_date = params[:release_date]
                 @game.details = params[:details]
@@ -73,10 +85,12 @@ class GamesController < ApplicationController
                 redirect "/games"
             else
                 redirect "/"
+            end
         else
             redirect "/"
         end
     end
+
     
     
     

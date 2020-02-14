@@ -1,1 +1,13 @@
-Here are all of my games
+<head><h2>Games List</h2></head>
+
+<body>
+<%@games.each do |game|%>
+<h3><%="Title: #{game.name}"%></h3>
+<%="Console: #{game.console}"%><br>
+<%="Release Date: #{game.release_date}"%><br>
+<p><%="Details: #{game.details}"%><br></p>
+<p><a href="/games/<%= "#{game.id}" %>/edit">edit game</a>
+</p>
+<%end%>
+</body>
+
