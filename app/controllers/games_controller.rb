@@ -2,13 +2,21 @@ class GamesController < ApplicationController
     
     #Displays all games
     get "/games" do 
-        @games = Game.all
-        erb :"/games/index"
+        if logged_in?
+            @games = Game.all
+            erb :"/games/index"
+        else
+            redirect "/login"
+        end
     end
 
     #Dislpays a form to create a new game
     get "/games/new" do 
-        erb :"/games/new"
+        if logged_in?
+            erb :"/games/new"
+        else
+            redirect "/login"
+        end
     end
 
     #Creates a new game

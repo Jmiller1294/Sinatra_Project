@@ -1,7 +1,8 @@
 <head><h2>Games List</h2></head>
 
 <body>
-<%@games.each do |game|%>
+<%@games.select do |game|%>
+<%if game.user.id == current_user.id%>
 <h3><%="Title: #{game.name}"%></h3>
 <%="Console: #{game.console}"%><br>
 <%="Release Date: #{game.release_date}"%><br>
@@ -12,6 +13,7 @@
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="submit" value="delete game">
 </form>
+    <%end%>
 <%end%>
 </body>
 
