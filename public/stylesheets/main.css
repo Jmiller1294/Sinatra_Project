@@ -13,7 +13,7 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: lightblue;
+    background-color: lightgray;
     color: #333;
     font-family: Sans-Serif;
     line-height: 18px;
@@ -112,4 +112,20 @@
     font-size: 18px;
     line-height: 24px;
   }
+}
+
+.topnav-centered {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.welcome-page {
+  text-align: center;
+}
+
+.bottom-navbar {
+  text-align: center;
 }

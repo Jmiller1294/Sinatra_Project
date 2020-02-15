@@ -11,7 +11,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id #logs the user in 
             redirect "users/#{@user.id}"
         else
-            redirect "/signup"
+            redirect "/login"
         end
     end
 

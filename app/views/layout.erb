@@ -14,10 +14,12 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
-  <div class="nav">
+  <%if logged_in?%>
+  <div class="bottom-navbar">
     <a href="/logout">Logout</a>
     <a href="/games">Games Library</a>
     <a href="/games/new">Add A New Game</a>
+  <%end%>
   </div>
     <div class="wrapper">
 

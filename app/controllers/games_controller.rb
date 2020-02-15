@@ -22,7 +22,7 @@ class GamesController < ApplicationController
     #Creates a new game
     post "/games" do 
         if logged_in?
-            if params[:name] != "" && params[:console] !="" && params[:release_date] != "" && params[:details] !=""
+            if not_empty_string
                 @game = Game.create(user_id: current_user.id, name: params[:name], console: params[:console], release_date: params[:release_date], details: params[:details])
                 if @game.user == current_user
                     redirect "/games/#{@game.id}"
@@ -69,7 +69,7 @@ class GamesController < ApplicationController
     patch "/games/:id" do 
         @game = Game.find_by(id: params[:id])
         if logged_in?
-            if @game.user == current_user
+            if @game.user == current_user && not_empty_string
                 @game.name = params[:name]
                 @game.console = params[:console]
                 @game.release_date = params[:release_date]
@@ -99,7 +99,11 @@ class GamesController < ApplicationController
         end
     end
 
-    
+    def not_empty_string
+      if params[:name] != "" && params[:console] !="" && params[:release_date] != "" && params[:details] !=""
+        true
+      end
+    end
     
     
 
