@@ -2,12 +2,9 @@ class GamesController < ApplicationController
     
     #Displays all games
     get "/games" do 
-        if logged_in?
+       redirect_if_not_logged_in
             @games = Game.all
             erb :"/games/index"
-        else
-            redirect "/login"
-        end
     end
 
     #Dislpays a form to create a new game
